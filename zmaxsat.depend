@@ -1,0 +1,129 @@
+# depslib dependency file v1.0
+1440390062 source:/home/frankc/C++/zmaxsat/core/main.cc
+	<errno.h>
+	<signal.h>
+	<zlib.h>
+	"../utils/ParseUtils.h"
+	"../core/Solver.h"
+
+1367195029 /home/frankc/package/zlib-1.2.8/zlib.h
+	"zconf.h"
+
+1439479981 /home/frankc/package/zlib-1.2.8/zconf.h
+	<windows.h>
+	<limits.h>
+	<sys/types.h>
+	<stdarg.h>
+	<stddef.h>
+	<unistd.h>
+	<unixio.h>
+
+1440389931 /home/frankc/C++/zmaxsat/utils/ParseUtils.h
+	<stdlib.h>
+	<stdio.h>
+	<zlib.h>
+
+1440391447 /home/frankc/C++/zmaxsat/core/Solver.h
+	"../mtl/Vec.h"
+	"../mtl/Heap.h"
+	"../mtl/Alg.h"
+	"../core/SolverTypes.h"
+
+1440390069 /home/frankc/C++/zmaxsat/mtl/Vec.h
+	<assert.h>
+	<new>
+	"../mtl/IntTypes.h"
+	"../mtl/XAlloc.h"
+
+1440389918 /home/frankc/C++/zmaxsat/mtl/IntTypes.h
+	<sys/int_types.h>
+	<sys/int_fmtio.h>
+	<sys/int_limits.h>
+	<stdint.h>
+	<inttypes.h>
+	<limits.h>
+
+1440389922 /home/frankc/C++/zmaxsat/mtl/XAlloc.h
+	<errno.h>
+	<stdlib.h>
+
+1440389924 /home/frankc/C++/zmaxsat/mtl/Heap.h
+	"../mtl/Vec.h"
+
+1440389932 /home/frankc/C++/zmaxsat/mtl/Alg.h
+	"../mtl/Vec.h"
+
+1440390073 /home/frankc/C++/zmaxsat/core/SolverTypes.h
+	<assert.h>
+	"../mtl/IntTypes.h"
+	"../mtl/Alg.h"
+	"../mtl/Vec.h"
+	"../mtl/Map.h"
+	"../mtl/Alloc.h"
+
+1440389937 /home/frankc/C++/zmaxsat/mtl/Map.h
+	"../mtl/IntTypes.h"
+	"../mtl/Vec.h"
+
+1440389920 /home/frankc/C++/zmaxsat/mtl/Alloc.h
+	"../mtl/XAlloc.h"
+	"../mtl/Vec.h"
+
+1440390062 source:/home/frankc/C++/h-zmaxsat/core/main.cc
+	<errno.h>
+	<signal.h>
+	<zlib.h>
+	"../utils/ParseUtils.h"
+	"../core/Solver.h"
+
+1440389931 /home/frankc/C++/h-zmaxsat/utils/ParseUtils.h
+	<stdlib.h>
+	<stdio.h>
+	<zlib.h>
+
+1440395876 /home/frankc/C++/h-zmaxsat/core/Solver.h
+	"../mtl/Vec.h"
+	"../mtl/Heap.h"
+	"../mtl/Alg.h"
+	"../core/SolverTypes.h"
+
+1440390069 /home/frankc/C++/h-zmaxsat/mtl/Vec.h
+	<assert.h>
+	<new>
+	"../mtl/IntTypes.h"
+	"../mtl/XAlloc.h"
+
+1440389918 /home/frankc/C++/h-zmaxsat/mtl/IntTypes.h
+	<sys/int_types.h>
+	<sys/int_fmtio.h>
+	<sys/int_limits.h>
+	<stdint.h>
+	<inttypes.h>
+	<limits.h>
+
+1440389922 /home/frankc/C++/h-zmaxsat/mtl/XAlloc.h
+	<errno.h>
+	<stdlib.h>
+
+1440389924 /home/frankc/C++/h-zmaxsat/mtl/Heap.h
+	"../mtl/Vec.h"
+
+1440389932 /home/frankc/C++/h-zmaxsat/mtl/Alg.h
+	"../mtl/Vec.h"
+
+1440417584 /home/frankc/C++/h-zmaxsat/core/SolverTypes.h
+	<assert.h>
+	"../mtl/IntTypes.h"
+	"../mtl/Alg.h"
+	"../mtl/Vec.h"
+	"../mtl/Map.h"
+	"../mtl/Alloc.h"
+
+1440389937 /home/frankc/C++/h-zmaxsat/mtl/Map.h
+	"../mtl/IntTypes.h"
+	"../mtl/Vec.h"
+
+1440389920 /home/frankc/C++/h-zmaxsat/mtl/Alloc.h
+	"../mtl/XAlloc.h"
+	"../mtl/Vec.h"
+
