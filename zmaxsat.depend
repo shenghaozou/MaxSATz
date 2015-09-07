@@ -81,7 +81,7 @@
 	<stdio.h>
 	<zlib.h>
 
-1440395876 /home/frankc/C++/h-zmaxsat/core/Solver.h
+1441612599 /home/frankc/C++/h-zmaxsat/core/Solver.h
 	"../mtl/Vec.h"
 	"../mtl/Heap.h"
 	"../mtl/Alg.h"
@@ -111,7 +111,7 @@
 1440389932 /home/frankc/C++/h-zmaxsat/mtl/Alg.h
 	"../mtl/Vec.h"
 
-1440417584 /home/frankc/C++/h-zmaxsat/core/SolverTypes.h
+1441613481 /home/frankc/C++/h-zmaxsat/core/SolverTypes.h
 	<assert.h>
 	"../mtl/IntTypes.h"
 	"../mtl/Alg.h"

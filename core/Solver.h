@@ -17,7 +17,7 @@ public:
     // Constructor/Destructor
     Var newVar (bool polarity = true);
 
-    bool addClause const vec<Lit>& ps);
+    bool addClause(const vec<Lit>& ps);
     void attachClause(CRef cr);
     void detachClause(CRef cr,bool strict);
     void removeClause(CRef cr);
@@ -31,8 +31,6 @@ public:
     void lookahead();
     void cancelConflictSet();
 
-    uint32_t lookahead();
-
     void processUnitClause();
 
     Lit pickBranchLit();
@@ -45,7 +43,9 @@ protected:
     static inline VarData mkVarData(int state,CRef reason, int dl){VarData d={state,reason,dl};return d;}
     struct VarValue {int current;int rest;};
     static inline VarValue mkVarValue(int current, int rest){VarValue v={current,rest};return v;}
-    static inline decisionLevel{return currentDl;}
+    inline int decisionLevel(){return currentDl;}
+
+    ClauseAllocator ca;
 
     struct Watcher {
         CRef cref;
@@ -84,7 +84,6 @@ protected:
 
     vec<double> clauseActivity;
 
-    ClauseAllocator ca;
     vec<CRef> passiveClause;
     vec<CRef> myUnitClause;
     vec<CRef> unitclause;

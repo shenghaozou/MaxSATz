@@ -32,7 +32,7 @@ OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWA
 
 
 
-namespace zmaxsat {
+using namespace zmaxsat;
 
 //=================================================================================================
 // Variables, literals, lifted booleans, clauses:
@@ -122,7 +122,8 @@ inline lbool toLbool(int   v) { return lbool((uint8_t)v);  }
 class Clause;
 typedef RegionAllocator<uint32_t>::Ref CRef;
 
-class Clause {
+class Clause
+{
     struct {
         unsigned mark      : 2;
         unsigned learnt    : 1;
@@ -132,20 +133,22 @@ class Clause {
         unsigned involved  : 1;
         unsigned dl        : 32;
         unsigned size      : 27;
-        unsigned cSetSize  : 23; }                            header;
+        unsigned cSetSize  : 23;
+        vec<CRef> *lSet      : 32;}                                  header;
     union { Lit lit; float act; uint32_t abs; CRef rel; CRef cfl;} data[0];
 
     friend class ClauseAllocator;
 
 
     // NOTE: This constructor cannot be used directly (doesn't allocate enough memory).
-    Clause(const vec<Lit>& ps, bool use_extra, bool learnt,const vec<CRef>& pcs=NULLRef(vec<CRef>)) { //New Clauses
+    Clause(const vec<Lit>& ps, bool use_extra, bool learnt,const vec<CRef>& pcs=NULLRef(const vec<CRef>)) { //New Clauses
         header.mark      = 0;
         header.learnt    = learnt;
         header.has_extra = use_extra;
         header.reloced   = 0;
         header.size      = ps.size();
         header.cSetSize  = 0;
+        header.lSet=new vec<CRef>;
 
         for (int i = 0; i < ps.size(); i++)
             data[i].lit = ps[i];
@@ -157,9 +160,9 @@ class Clause {
                 calcAbstraction(); }
         if(header.learnt)
         {
-            assert(pcs!=NULLRef(CRef));
+            int j=0;
             header.cSetSize=pcs.size();
-            for(int i=ps.size(),int j=0;i<ps.size()+pcs.size();i++,j++) data[i].cfl=pcs[i];
+            for(int i=ps.size()+header.has_extra;i<ps.size()+header.has_extra+pcs.size();i++,j++) data[i].cfl=pcs[i];
         }
     }
 
@@ -171,8 +174,10 @@ class Clause {
         header.size      = ps.size();
         header.cSetSize  = ps.cSetSize();
 
-        for (int i = 0; i < ps.size()+ps.cSetSize(); i++)
-            data[i]= ps[i];
+        for (int i = 0; i < ps.size(); i++)
+            data[i].lit= ps[i];
+        for(int i=ps.size()+ps.has_extra();i<ps.size()+ps.has_extra()+ps.cSetSize();i++)
+            data[i].cfl=ps.cSet(i-ps.size());
 
         if (header.has_extra){
             if (header.learnt)
@@ -207,6 +212,7 @@ public:
     //       subsumption operations to behave correctly.
     Lit&         operator [] (int i)         { return data[i].lit; }
     Lit          operator [] (int i) const   { return data[i].lit; }
+    CRef         cSet        (int i) const   { return data[header.cSetSize+header.has_extra+i].cfl; }
     operator const Lit* (void) const         { return (Lit*)data; }
 
     float&       activity    ()              { assert(header.has_extra); return data[header.size].act; }
@@ -214,7 +220,7 @@ public:
 
     Lit          subsumes    (const Clause& other) const;
     void         strengthen  (Lit p);
-
+};
 //=================================================================================================
 // ClauseAllocator -- a simple class for allocating memory for clauses:
 
@@ -248,18 +254,19 @@ class ClauseAllocator : public RegionAllocator<uint32_t>
 
     CRef alloc(const vec<Lit>& ps, bool learnt = false,const vec<CRef>& pcs=NULLRef(vec<CRef>)) // Alloc for New
     {
+        CRef cid;
         assert(sizeof(Lit)      == sizeof(uint32_t));
         assert(sizeof(float)    == sizeof(uint32_t));
         assert(sizeof(CRef)    == sizeof(uint32_t));
         bool use_extra = learnt | extra_clause_field;
         if(learnt)
         {
-            CRef cid = RegionAllocator<uint32_t>::alloc(clauseWord32Size(ps.size(), use_extra,pcs.size()));
+            cid = RegionAllocator<uint32_t>::alloc(clauseWord32Size(ps.size(), use_extra,pcs.size()));
             new (lea(cid)) Clause(ps, use_extra, learnt, pcs);
         }
         else
         {
-            CRef cid = RegionAllocator<uint32_t>::alloc(clauseWord32Size(ps.size(), use_extra));
+            cid = RegionAllocator<uint32_t>::alloc(clauseWord32Size(ps.size(), use_extra));
             new (lea(cid)) Clause(ps, use_extra, learnt);
         }
         return cid;
@@ -475,7 +482,7 @@ inline void Clause::strengthen(Lit p)
 }
 
 //=================================================================================================
-}
+
 
 
 #endif
