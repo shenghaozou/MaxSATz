@@ -134,7 +134,7 @@ class Clause
         unsigned dl        : 32;
         unsigned size      : 27;
         unsigned cSetSize  : 23;
-        vec<CRef> *lSet      : 32;}                                  header;
+        vec<CRef>*         lSet;     }                                  header;
     union { Lit lit; float act; uint32_t abs; CRef rel; CRef cfl;} data[0];
 
     friend class ClauseAllocator;
@@ -148,7 +148,7 @@ class Clause
         header.reloced   = 0;
         header.size      = ps.size();
         header.cSetSize  = 0;
-        header.lSet=new vec<CRef>;
+        if (!learnt) header.lSet = new vec<CRef>; else header.lSet=nullptr;
 
         for (int i = 0; i < ps.size(); i++)
             data[i].lit = ps[i];
@@ -173,7 +173,7 @@ class Clause
         header.reloced   = 0;
         header.size      = ps.size();
         header.cSetSize  = ps.cSetSize();
-
+        header.lSet      = ps.lSetHeader();
         for (int i = 0; i < ps.size(); i++)
             data[i].lit= ps[i];
         for(int i=ps.size()+ps.has_extra();i<ps.size()+ps.has_extra()+ps.cSetSize();i++)
@@ -203,7 +203,6 @@ public:
     uint32_t     mark        ()      const   { return header.mark; }
     void         mark        (uint32_t m)    { header.mark = m; }
     const Lit&   last        ()      const   { return data[header.size-1].lit; }
-
     bool         reloced     ()      const   { return header.reloced; }
     CRef         relocation  ()      const   { return data[0].rel; }
     void         relocate    (CRef c)        { header.reloced = 1; data[0].rel = c; }
@@ -213,6 +212,8 @@ public:
     Lit&         operator [] (int i)         { return data[i].lit; }
     Lit          operator [] (int i) const   { return data[i].lit; }
     CRef         cSet        (int i) const   { return data[header.cSetSize+header.has_extra+i].cfl; }
+    vec<CRef>*   lSetHeader  ()      const   { assert(header.lSet!=nullptr); return header.lSet; }
+
     operator const Lit* (void) const         { return (Lit*)data; }
 
     float&       activity    ()              { assert(header.has_extra); return data[header.size].act; }
@@ -282,6 +283,7 @@ class ClauseAllocator : public RegionAllocator<uint32_t>
     void free(CRef cid)
     {
         Clause& c = operator[](cid);
+        if(!c.learnt()) delete c.lSetHeader();
         RegionAllocator<uint32_t>::free(clauseWord32Size(c.size(), c.has_extra(),c.cSetSize()));
     }
 
@@ -482,6 +484,8 @@ inline void Clause::strengthen(Lit p)
 }
 
 //=================================================================================================
+
+#define ADD_CODE
 
 
 
