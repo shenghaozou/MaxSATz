@@ -1,53 +1,35 @@
-/***********************************************************************************[SolverTypes.h]
-Copyright (c) 2003-2006, Niklas Een, Niklas Sorensson
-Copyright (c) 2007-2010, Niklas Sorensson
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
-associated documentation files (the "Software"), to deal in the Software without restriction,
-including without limitation the rights to use, copy, modify, merge, publish, distribute,
-sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or
-substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
-NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-**************************************************************************************************/
 #define NULLRef(type) (*((type*)(NULL)))
 
 #ifndef zmaxsat_SolverTypes_h
 #define zmaxsat_SolverTypes_h
 
 #include <assert.h>
-
+#include <stdio.h>
 #include "../mtl/IntTypes.h"
 #include "../mtl/Alg.h"
 #include "../mtl/Vec.h"
 #include "../mtl/Map.h"
 #include "../mtl/Alloc.h"
+#include "../core/debug.h"
 
 
-
-using namespace zmaxsat;
+ namespace zmaxsat{
 
 //=================================================================================================
 // Variables, literals, lifted booleans, clauses:
-
-
-// NOTE! Variables are just integers. No abstraction here. They should be chosen from 0..N,
-// so that they can be used as array indices.
-
 typedef int Var;
 #define var_Undef (-1)
+#define TRUE 1
+#define FALSE 0
+#define NONE -1
 
+#define ACTIVE 1
+#define PASSIVE 0
+#define ZERO -1
 
 struct Lit {
     int     x;
-
     // Use this as a constructor:
     friend Lit mkLit(Var var, bool sign = false);
 
@@ -56,6 +38,9 @@ struct Lit {
     bool operator <  (Lit p) const { return x < p.x;  } // '<' makes p, ~p adjacent in the ordering.
 };
 
+ #if DEBUG
+    vec<Lit>& createVecLit(int,...);
+ #endif
 
 inline  Lit  mkLit     (Var var, bool sign) { Lit p; p.x = var + var + (int)sign; return p; }
 inline  Lit  operator ~(Lit p)              { Lit q; q.x = p.x ^ 1; return q; }
@@ -147,8 +132,10 @@ class Clause
         header.has_extra = use_extra;
         header.reloced   = 0;
         header.size      = ps.size();
-        header.cSetSize  = 0;
-        if (!learnt) header.lSet = new vec<CRef>; else header.lSet=nullptr;
+        header.cSetSize  = pcs.size();
+        header.state=ACTIVE;
+        header.involved=0;
+        if (!learnt) header.lSet = new vec<CRef>; else header.lSet=NULL;
 
         for (int i = 0; i < ps.size(); i++)
             data[i].lit = ps[i];
@@ -174,6 +161,8 @@ class Clause
         header.size      = ps.size();
         header.cSetSize  = ps.cSetSize();
         header.lSet      = ps.lSetHeader();
+        header.state=ps.state();
+        header.involved=ps.involved();
         for (int i = 0; i < ps.size(); i++)
             data[i].lit= ps[i];
         for(int i=ps.size()+ps.has_extra();i<ps.size()+ps.has_extra()+ps.cSetSize();i++)
@@ -202,6 +191,12 @@ public:
     bool         has_extra   ()      const   { return header.has_extra; }
     uint32_t     mark        ()      const   { return header.mark; }
     void         mark        (uint32_t m)    { header.mark = m; }
+    uint8_t state      ()      const   {return header.state;   }
+    void        state   (uint32_t s)  { header.state=s;   }
+    bool involved      ()      const   {return header.involved;   }
+    void        involved   (uint32_t s)  { header.involved=s;   }
+    uint32_t dl() const{return header.dl;}
+    void dl(uint32_t level ) {header.dl=level;}
     const Lit&   last        ()      const   { return data[header.size-1].lit; }
     bool         reloced     ()      const   { return header.reloced; }
     CRef         relocation  ()      const   { return data[0].rel; }
@@ -212,15 +207,47 @@ public:
     Lit&         operator [] (int i)         { return data[i].lit; }
     Lit          operator [] (int i) const   { return data[i].lit; }
     CRef         cSet        (int i) const   { return data[header.cSetSize+header.has_extra+i].cfl; }
-    vec<CRef>*   lSetHeader  ()      const   { assert(header.lSet!=nullptr); return header.lSet; }
+    vec<CRef>*   lSetHeader  ()      const   { assert(header.lSet!=NULL); return (header.lSet); }
 
     operator const Lit* (void) const         { return (Lit*)data; }
 
     float&       activity    ()              { assert(header.has_extra); return data[header.size].act; }
+
     uint32_t     abstraction () const        { assert(header.has_extra); return data[header.size].abs; }
 
     Lit          subsumes    (const Clause& other) const;
     void         strengthen  (Lit p);
+
+#define args(type,name) (printf("name:%type ",header.name))
+    void showclause(bool detail=false) const
+    {
+            printf("[Clause] <");
+            for(int i=0;i<header.size;i++) printf("%d ",data[i]);
+            printf(">\n");
+            if(header.learnt)
+            {
+                printf("...[CSet] <");
+                for(int i=0;i<header.cSetSize;i++) printf(" %d ",cSet(i));
+                printf(">\n");
+            }
+            else
+            {
+                printf("...[lSet] <");
+                vec<CRef> *lset=lSetHeader();
+                for(int i=0;i<(*lset).size();i++) printf("%d ",(*lset)[i]);
+                printf(">\n");
+            }
+            if(detail)
+            {
+                printf("...[Detail] \n");
+                args(d,size);
+                args(d,cSetSize);
+                args(d,learnt);
+                args(d,has_extra);
+                args(d,state);
+                printf("\n");
+            }
+    }
 };
 //=================================================================================================
 // ClauseAllocator -- a simple class for allocating memory for clauses:
@@ -320,7 +347,7 @@ class OccLists
  public:
     OccLists(const Deleted& d) : deleted(d) {}
 
-    void  init      (const Idx& idx){ occs.growTo(toInt(idx)+1); dirty.growTo(toInt(idx)+1, 0); }
+    void  init(const Idx& idx){ occs.growTo(toInt(idx)+1); dirty.growTo(toInt(idx)+1, 0); }
     // Vec&  operator[](const Idx& idx){ return occs[toInt(idx)]; }
     Vec&  operator[](const Idx& idx){ return occs[toInt(idx)]; }
     Vec&  lookup    (const Idx& idx){ if (dirty[toInt(idx)]) clean(idx); return occs[toInt(idx)]; }
@@ -487,7 +514,7 @@ inline void Clause::strengthen(Lit p)
 
 #define ADD_CODE
 
-
+}
 
 #endif
 

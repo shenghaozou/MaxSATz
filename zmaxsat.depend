@@ -6,10 +6,22 @@
 	"../utils/ParseUtils.h"
 	"../core/Solver.h"
 
+1441892288 olver.h"
+
 1367195029 /home/frankc/package/zlib-1.2.8/zlib.h
 	"zconf.h"
+	"zconf.h"
+
+1441805787 
 
 1439479981 /home/frankc/package/zlib-1.2.8/zconf.h
+	<windows.h>
+	<limits.h>
+	<sys/types.h>
+	<stdarg.h>
+	<stddef.h>
+	<unistd.h>
+	<unixio.h>
 	<windows.h>
 	<limits.h>
 	<sys/types.h>
@@ -29,11 +41,15 @@
 	"../mtl/Alg.h"
 	"../core/SolverTypes.h"
 
+1441887666 olverTypes.h"
+
 1440390069 /home/frankc/C++/zmaxsat/mtl/Vec.h
 	<assert.h>
 	<new>
 	"../mtl/IntTypes.h"
 	"../mtl/XAlloc.h"
+
+1441872320 lloc.h"
 
 1440389918 /home/frankc/C++/zmaxsat/mtl/IntTypes.h
 	<sys/int_types.h>
@@ -50,6 +66,8 @@
 1440389924 /home/frankc/C++/zmaxsat/mtl/Heap.h
 	"../mtl/Vec.h"
 
+1440389926 c.h"
+
 1440389932 /home/frankc/C++/zmaxsat/mtl/Alg.h
 	"../mtl/Vec.h"
 
@@ -61,6 +79,8 @@
 	"../mtl/Map.h"
 	"../mtl/Alloc.h"
 
+1441885462 loc.h"
+
 1440389937 /home/frankc/C++/zmaxsat/mtl/Map.h
 	"../mtl/IntTypes.h"
 	"../mtl/Vec.h"
@@ -69,11 +89,17 @@
 	"../mtl/XAlloc.h"
 	"../mtl/Vec.h"
 
-1440390062 source:/home/frankc/C++/h-zmaxsat/core/main.cc
+1442217555 source:/home/frankc/C++/h-zmaxsat/core/main.cc
 	<errno.h>
 	<signal.h>
 	<zlib.h>
 	"../utils/ParseUtils.h"
+	"../core/Solver.h"
+	<errno.h>
+	<signal.h>
+	<zlib.h>
+	"../utils/System.h"
+	"Input.h"
 	"../core/Solver.h"
 
 1440389931 /home/frankc/C++/h-zmaxsat/utils/ParseUtils.h
@@ -81,13 +107,22 @@
 	<stdio.h>
 	<zlib.h>
 
-1441612599 /home/frankc/C++/h-zmaxsat/core/Solver.h
+1442221787 /home/frankc/C++/h-zmaxsat/core/Solver.h
 	"../mtl/Vec.h"
 	"../mtl/Heap.h"
 	"../mtl/Alg.h"
 	"../core/SolverTypes.h"
+	"../mtl/Vec.h"
+	"../mtl/Heap.h"
+	"../mtl/Alg.h"
+	"../core/SolverTypes.h"
+	"../core/debug.h"
 
-1440390069 /home/frankc/C++/h-zmaxsat/mtl/Vec.h
+1441872320 /home/frankc/C++/h-zmaxsat/mtl/Vec.h
+	<assert.h>
+	<new>
+	"../mtl/IntTypes.h"
+	"../mtl/XAlloc.h"
 	<assert.h>
 	<new>
 	"../mtl/IntTypes.h"
@@ -100,30 +135,383 @@
 	<stdint.h>
 	<inttypes.h>
 	<limits.h>
+	<sys/int_types.h>
+	<sys/int_fmtio.h>
+	<sys/int_limits.h>
+	<stdint.h>
+	<inttypes.h>
+	<limits.h>
 
 1440389922 /home/frankc/C++/h-zmaxsat/mtl/XAlloc.h
+	<errno.h>
+	<stdlib.h>
 	<errno.h>
 	<stdlib.h>
 
 1440389924 /home/frankc/C++/h-zmaxsat/mtl/Heap.h
 	"../mtl/Vec.h"
+	"../mtl/Vec.h"
 
 1440389932 /home/frankc/C++/h-zmaxsat/mtl/Alg.h
 	"../mtl/Vec.h"
+	"../mtl/Vec.h"
 
-1441614597 /home/frankc/C++/h-zmaxsat/core/SolverTypes.h
+1442217827 /home/frankc/C++/h-zmaxsat/core/SolverTypes.h
 	<assert.h>
 	"../mtl/IntTypes.h"
 	"../mtl/Alg.h"
 	"../mtl/Vec.h"
 	"../mtl/Map.h"
 	"../mtl/Alloc.h"
+	<assert.h>
+	<stdio.h>
+	"../mtl/IntTypes.h"
+	"../mtl/Alg.h"
+	"../mtl/Vec.h"
+	"../mtl/Map.h"
+	"../mtl/Alloc.h"
+	"../core/debug.h"
 
 1440389937 /home/frankc/C++/h-zmaxsat/mtl/Map.h
+	"../mtl/IntTypes.h"
+	"../mtl/Vec.h"
 	"../mtl/IntTypes.h"
 	"../mtl/Vec.h"
 
 1440389920 /home/frankc/C++/h-zmaxsat/mtl/Alloc.h
 	"../mtl/XAlloc.h"
 	"../mtl/Vec.h"
+	"../mtl/XAlloc.h"
+	"../mtl/Vec.h"
+
+1441798609 source:e:\h-zmaxsat\core\main.cc
+	<errno.h>
+	<signal.h>
+	<zlib.h>
+	"../utils/System.h"
+	"Input.h"
+	"../core/Solver.h"
+
+1440389931 e:\h-zmaxsat\utils\parseutils.h
+	<stdlib.h>
+	<stdio.h>
+	<zlib.h>
+
+1441887666 e:\h-zmaxsat\core\solver.h
+	"../mtl/Vec.h"
+	"../mtl/Heap.h"
+	"../mtl/Alg.h"
+	"../core/SolverTypes.h"
+
+1441872320 e:\h-zmaxsat\mtl\vec.h
+	<assert.h>
+	<new>
+	"../mtl/IntTypes.h"
+	"../mtl/XAlloc.h"
+
+1440389918 e:\h-zmaxsat\mtl\inttypes.h
+	<sys/int_types.h>
+	<sys/int_fmtio.h>
+	<sys/int_limits.h>
+	<stdint.h>
+	<inttypes.h>
+	<limits.h>
+
+1440389922 e:\h-zmaxsat\mtl\xalloc.h
+	<errno.h>
+	<stdlib.h>
+
+1440389924 e:\h-zmaxsat\mtl\heap.h
+	"../mtl/Vec.h"
+
+1440389932 e:\h-zmaxsat\mtl\alg.h
+	"../mtl/Vec.h"
+
+1441885462 e:\h-zmaxsat\core\solvertypes.h
+	<assert.h>
+	<stdio.h>
+	"../mtl/IntTypes.h"
+	"../mtl/Alg.h"
+	"../mtl/Vec.h"
+	"../mtl/Map.h"
+	"../mtl/Alloc.h"
+
+1440389937 e:\h-zmaxsat\mtl\map.h
+	"../mtl/IntTypes.h"
+	"../mtl/Vec.h"
+
+1440389920 e:\h-zmaxsat\mtl\alloc.h
+	"../mtl/XAlloc.h"
+	"../mtl/Vec.h"
+
+1442217555 source:/home/xiaofanfan/zsh/h-zmaxsat/core/main.cc
+	<errno.h>
+	<signal.h>
+	<zlib.h>
+	"../utils/System.h"
+	"Input.h"
+	"../core/Solver.h"
+	<errno.h>
+	<signal.h>
+	<zlib.h>
+	"../utils/System.h"
+	"Input.h"
+	"../core/Solver.h"
+
+1440389931 /home/xiaofanfan/zsh/h-zmaxsat/utils/ParseUtils.h
+	<stdlib.h>
+	<stdio.h>
+	<zlib.h>
+
+1442262144 /home/xiaofanfan/zsh/h-zmaxsat/core/Solver.h
+	"../mtl/Vec.h"
+	"../mtl/Heap.h"
+	"../mtl/Alg.h"
+	"../core/SolverTypes.h"
+	"../mtl/Vec.h"
+	"../mtl/Heap.h"
+	"../mtl/Alg.h"
+	"../core/SolverTypes.h"
+	"../core/debug.h"
+
+1441872320 /home/xiaofanfan/zsh/h-zmaxsat/mtl/Vec.h
+	<assert.h>
+	<new>
+	"../mtl/IntTypes.h"
+	"../mtl/XAlloc.h"
+	<assert.h>
+	<new>
+	"../mtl/IntTypes.h"
+	"../mtl/XAlloc.h"
+
+1440389918 /home/xiaofanfan/zsh/h-zmaxsat/mtl/IntTypes.h
+	<sys/int_types.h>
+	<sys/int_fmtio.h>
+	<sys/int_limits.h>
+	<stdint.h>
+	<inttypes.h>
+	<limits.h>
+	<sys/int_types.h>
+	<sys/int_fmtio.h>
+	<sys/int_limits.h>
+	<stdint.h>
+	<inttypes.h>
+	<limits.h>
+
+1440389922 /home/xiaofanfan/zsh/h-zmaxsat/mtl/XAlloc.h
+	<errno.h>
+	<stdlib.h>
+	<errno.h>
+	<stdlib.h>
+
+1440389924 /home/xiaofanfan/zsh/h-zmaxsat/mtl/Heap.h
+	"../mtl/Vec.h"
+	"../mtl/Vec.h"
+
+1440389932 /home/xiaofanfan/zsh/h-zmaxsat/mtl/Alg.h
+	"../mtl/Vec.h"
+	"../mtl/Vec.h"
+
+1442258462 /home/xiaofanfan/zsh/h-zmaxsat/core/SolverTypes.h
+	<assert.h>
+	<stdio.h>
+	"../mtl/IntTypes.h"
+	"../mtl/Alg.h"
+	"../mtl/Vec.h"
+	"../mtl/Map.h"
+	"../mtl/Alloc.h"
+	<assert.h>
+	<stdio.h>
+	"../mtl/IntTypes.h"
+	"../mtl/Alg.h"
+	"../mtl/Vec.h"
+	"../mtl/Map.h"
+	"../mtl/Alloc.h"
+	"../core/debug.h"
+
+1440389937 /home/xiaofanfan/zsh/h-zmaxsat/mtl/Map.h
+	"../mtl/IntTypes.h"
+	"../mtl/Vec.h"
+	"../mtl/IntTypes.h"
+	"../mtl/Vec.h"
+
+1440389920 /home/xiaofanfan/zsh/h-zmaxsat/mtl/Alloc.h
+	"../mtl/XAlloc.h"
+	"../mtl/Vec.h"
+	"../mtl/XAlloc.h"
+	"../mtl/Vec.h"
+
+1441786569 /home/xiaofanfan/zsh/h-zmaxsat/utils/System.h
+	<fpu_control.h>
+	"../mtl/IntTypes.h"
+	<time.h>
+	<sys/time.h>
+	<sys/resource.h>
+	<unistd.h>
+	<fpu_control.h>
+	"../mtl/IntTypes.h"
+	<time.h>
+	<sys/time.h>
+	<sys/resource.h>
+	<unistd.h>
+
+1441805787 /home/xiaofanfan/zsh/h-zmaxsat/core/Input.h
+	<stdio.h>
+	<zlib.h>
+	"Solver.h"
+	<stdio.h>
+	<zlib.h>
+	"Solver.h"
+
+1442262183 source:/home/xiaofanfan/zsh/h-zmaxsat/core/Solver.cc
+	<math.h>
+	"../mtl/Sort.h"
+	"../core/Solver.h"
+	<math.h>
+	"../mtl/Sort.h"
+	"../core/Solver.h"
+
+1440389926 /home/xiaofanfan/zsh/h-zmaxsat/mtl/Sort.h
+	"../mtl/Vec.h"
+	"../mtl/Vec.h"
+
+1441892623 source:/home/xiaofanfan/zsh/h-zmaxsat/utils/System.cc
+	"../utils/System.h"
+	<stdio.h>
+	<stdlib.h>
+	<malloc/malloc.h>
+	"../utils/System.h"
+	<stdio.h>
+	<stdlib.h>
+	<malloc/malloc.h>
+
+1441892623 lloc.h>
+
+1441786569 e:\h-zmaxsat\utils\system.h
+	<fpu_control.h>
+	"../mtl/IntTypes.h"
+	<time.h>
+	<sys/time.h>
+	<sys/resource.h>
+	<unistd.h>
+
+1441805787 e:\h-zmaxsat\core\input.h
+	<stdio.h>
+	<zlib.h>
+	"Solver.h"
+
+1441892623 source:e:\h-zmaxsat\utils\system.cc
+	"../utils/System.h"
+	<stdio.h>
+	<stdlib.h>
+	<malloc/malloc.h>
+
+1441786569 /home/frankc/C++/h-zmaxsat/utils/System.h
+	<fpu_control.h>
+	"../mtl/IntTypes.h"
+	<time.h>
+	<sys/time.h>
+	<sys/resource.h>
+	<unistd.h>
+
+1441805787 /home/frankc/C++/h-zmaxsat/core/Input.h
+	<stdio.h>
+	<zlib.h>
+	"Solver.h"
+
+1442221564 source:/home/frankc/C++/h-zmaxsat/core/Solver.cc
+	<math.h>
+	"../mtl/Sort.h"
+	"../core/Solver.h"
+
+1440389926 /home/frankc/C++/h-zmaxsat/mtl/Sort.h
+	"../mtl/Vec.h"
+
+1441892623 source:/home/frankc/C++/h-zmaxsat/utils/System.cc
+	"../utils/System.h"
+	<stdio.h>
+	<stdlib.h>
+	<malloc/malloc.h>
+
+1442217745 /home/frankc/C++/h-zmaxsat/core/debug.h
+
+1442217372 source:/home/frankc/C++/h-zmaxsat/core/debug.cc
+	"../core/Solver.h"
+	"../mtl/Vec.h"
+	<stdarg.h>
+
+1442217745 /home/xiaofanfan/zsh/h-zmaxsat/core/debug.h
+
+1442262183 source:f:\我的坚果云\h-zmaxsat\core\solver.cc
+	<math.h>
+	"../mtl/Sort.h"
+	"../core/Solver.h"
+
+1440389926 f:\我的坚果云\h-zmaxsat\mtl\sort.h
+	"../mtl/Vec.h"
+
+1441872320 f:\我的坚果云\h-zmaxsat\mtl\vec.h
+	<assert.h>
+	<new>
+	"../mtl/IntTypes.h"
+	"../mtl/XAlloc.h"
+
+1440389918 f:\我的坚果云\h-zmaxsat\mtl\inttypes.h
+	<sys/int_types.h>
+	<sys/int_fmtio.h>
+	<sys/int_limits.h>
+	<stdint.h>
+	<inttypes.h>
+	<limits.h>
+
+1440389922 f:\我的坚果云\h-zmaxsat\mtl\xalloc.h
+	<errno.h>
+	<stdlib.h>
+
+1442262144 f:\我的坚果云\h-zmaxsat\core\solver.h
+	"../mtl/Vec.h"
+	"../mtl/Heap.h"
+	"../mtl/Alg.h"
+	"../core/SolverTypes.h"
+	"../core/debug.h"
+
+1440389924 f:\我的坚果云\h-zmaxsat\mtl\heap.h
+	"../mtl/Vec.h"
+
+1440389932 f:\我的坚果云\h-zmaxsat\mtl\alg.h
+	"../mtl/Vec.h"
+
+1442258462 f:\我的坚果云\h-zmaxsat\core\solvertypes.h
+	<assert.h>
+	<stdio.h>
+	"../mtl/IntTypes.h"
+	"../mtl/Alg.h"
+	"../mtl/Vec.h"
+	"../mtl/Map.h"
+	"../mtl/Alloc.h"
+	"../core/debug.h"
+
+1440389937 f:\我的坚果云\h-zmaxsat\mtl\map.h
+	"../mtl/IntTypes.h"
+	"../mtl/Vec.h"
+
+1440389920 f:\我的坚果云\h-zmaxsat\mtl\alloc.h
+	"../mtl/XAlloc.h"
+	"../mtl/Vec.h"
+
+1442217745 f:\我的坚果云\h-zmaxsat\core\debug.h
+
+1441892623 source:f:\我的坚果云\h-zmaxsat\utils\system.cc
+	"../utils/System.h"
+	<stdio.h>
+	<stdlib.h>
+	<malloc/malloc.h>
+
+1441786569 f:\我的坚果云\h-zmaxsat\utils\system.h
+	<fpu_control.h>
+	"../mtl/IntTypes.h"
+	<time.h>
+	<sys/time.h>
+	<sys/resource.h>
+	<unistd.h>
 

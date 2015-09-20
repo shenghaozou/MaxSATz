@@ -16,7 +16,7 @@
 					<Add directory="../../package/zlib-1.2.8" />
 				</Compiler>
 				<Linker>
-					<Add library="../../package/zlib-1.2.8/libz.so" />
+					<Add library="libz.so" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -36,6 +36,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="core/Input.h" />
+		<Unit filename="core/Solver.cc" />
 		<Unit filename="core/Solver.h" />
 		<Unit filename="core/SolverTypes.h" />
 		<Unit filename="core/main.cc" />
@@ -48,10 +50,13 @@
 		<Unit filename="mtl/Sort.h" />
 		<Unit filename="mtl/Vec.h" />
 		<Unit filename="mtl/XAlloc.h" />
-		<Unit filename="utils/ParseUtils.h" />
+		<Unit filename="utils/Makefile" />
+		<Unit filename="utils/System.cc" />
+		<Unit filename="utils/System.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />
+			<envvars />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

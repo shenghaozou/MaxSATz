@@ -1,0 +1,8 @@
+1、main文件中的头文件还需要确定
+2、Input文件是MINISAT中ParseUtils.h和Dimacs.h两个文件的合并，完成
+
+2015年9月20日 刘燕丽
+1、单子句存储的时候，其block是-1。用define定义NONE 为-1.
+2、返回值统一使用小写的true false，不再使用大写的，可以去掉大写TRUE的define，我已经去掉了main中关于TURE的define定义
+
+
